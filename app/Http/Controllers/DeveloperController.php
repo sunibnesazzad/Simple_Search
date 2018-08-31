@@ -131,4 +131,19 @@ class DeveloperController extends Controller
         $pro= Programming_language::find($pro);
         return view('developer.showProgrammingDevelopers',compact('developers','pro'));
     }
+
+    //for json Result
+    public function jsonResult($id){
+      /*$developer = Developer::find($id);*/
+       $result1 = DB::table('developer_programming_language')
+            ->join('developers', 'developer_programming_language.developer_id', '=', 'developers.id')
+           ->join('developer_language', 'developers.id', '=', 'developer_language.developer_id')
+           ->join('programming_languages','developer_programming_language.programming_language_id', '=', 'programming_languages.id')
+           ->join('languages','developer_language.language_id', '=', 'languages.id')
+           ->select('developers.email','developers.id','programming_languages.name','languages.code')
+            ->where('developers.id', '=', $id)
+            ->get();
+
+        return $result1;
+    }
 }

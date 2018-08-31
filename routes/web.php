@@ -30,3 +30,7 @@ Route::get('/developer/search2',['as' => 'developer.search2', 'uses' => 'Develop
 Route::post('/developer/search2', 'DeveloperController@searchForBoth');
 
 Route::post('/queries', 'DeveloperController@query');
+
+//Route for API Search
+
+Route::get('/developer/json/{id}',['as' => 'developer.json', 'uses' => 'DeveloperController@jsonResult']);
